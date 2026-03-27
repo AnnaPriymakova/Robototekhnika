@@ -1,0 +1,27 @@
+const int pinPot=A0;
+
+const int pinLeftLed=11;
+const int pinRightLed=11;
+
+int valPot = 0;
+int valLeft = 0;
+int valRight = 0;
+
+void setup() {
+
+pinMode(pinLeftLed,OUTPUT);
+pinMode(pinRightLed,OUTPUT);
+
+}
+
+void loop() {
+
+valPot = analogRead(pinPot);
+
+valLeft=map(valPot,0,1023,255,0);
+valRight=map(valPot,0,1023,0,255);
+
+analogWrite(pinLeftLed,valLeft);
+analogWrite(pinRightLed,valRight);
+
+}
