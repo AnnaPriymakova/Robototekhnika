@@ -1,0 +1,36 @@
+unsigned long duration;
+
+#define MAX_DURATION 3000
+#define MIN_DURATION 300
+
+const int pinSpeaker=4;
+
+int octave1[]={261,293,329,349,392,440,494};
+
+const int pinPot=A0;
+
+void setup() {
+
+pinMode(pinSpeaker,OUTPUT);
+
+}
+
+void loop() {
+
+for(int i=0;i<7;i++) {
+
+int val=analogRead(pinPot);
+
+duration=map(val,0,1023,MIN_DURATION,MAX_DURATION);
+
+tone(pinSpeaker,octave1[i],duration);
+
+delay(duration);
+
+delay(duration/2);
+
+}
+
+delay(duration*5);
+
+}
