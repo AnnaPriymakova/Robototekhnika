@@ -1,0 +1,102 @@
+int pinButtons[]={2,3,4,5};
+int lastButtons[]={0,0,0,0};
+int currentButtons[]={0,0,0,0};
+
+int pinLeds[]={6,7,8,9,10,11,12};
+
+unsigned long interval=1000;
+unsigned long t=0;
+
+int tekled=0;
+int dir=1;
+
+void setup() {
+
+for(int i=0;i<4;i++) {
+pinMode (pinButtons[i], INPUT);
+}
+
+for(int i=0;i<8;i++) {
+pinMode (pinLeds[i], OUTPUT);
+}
+
+}
+
+void loop() {
+
+for(int i=0;i<4;i++)
+{
+
+currentButtons[i] = debounce(lastButtons[i], pinButtons[i]);
+
+if (lastButtons[i] == 0 && currentButtons[i] == 1)
+{
+doButtons(i);
+}
+
+lastButtons[i] = currentButtons[i];
+
+}
+
+if(millis()-t>=interval) {
+
+for (int i=0;i<8; i=i+1) {
+
+if(i==tekled)
+{digitalWrite(pinLeds[i],HIGH);}
+else
+{digitalWrite(pinLeds[i],LOW);}
+
+}
+
+tekled=(tekled+dir)%8;
+
+if(tekled<0) {
+tekled=7;
+}
+
+t=millis();
+
+}
+
+}
+
+void doButtons(int but)
+{
+
+switch(but)
+{
+
+case 0:
+dir=1;
+break;
+
+case 1:
+dir=-1;
+break;
+
+case 2:
+break;
+
+case 3:
+break;
+
+default:
+break;
+
+}
+
+}
+
+int debounce(int last,int pin1) {
+
+int current = digitalRead(pin1);
+
+if (last != current)
+{
+delay(5);
+current = digitalRead(pin1);
+return current;
+}
+
+}
