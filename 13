@@ -1,0 +1,30 @@
+int pinPot1=A0;
+int pinPot2=A1;
+
+int val1, val2;
+float val1Om, val2Om;
+
+void setup() {
+
+Serial.begin(9600);
+
+}
+
+void loop() {
+
+val1=analogRead(pinPot1);
+val2=analogRead(pinPot2);
+
+val1Om=2200.00*val1/1023;
+val2Om=10000.00*val2/1023;
+
+Serial.print("R1=");
+Serial.print(val1Om);
+Serial.print(" Om");
+Serial.print("   R2=");
+Serial.print(val2Om);
+Serial.println(" Om");
+
+delay(500);
+
+}
