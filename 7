@@ -1,0 +1,43 @@
+int LED=13;
+int BUTTON=2;
+
+boolean lastButton = LOW;
+boolean currentButton = LOW;
+boolean ledon = false;
+
+void setup() {
+
+Serial.begin(9600);
+pinMode (LED, OUTPUT);
+pinMode (BUTTON, INPUT);
+
+}
+
+void loop() {
+
+currentButton = debounce(lastButton);
+
+if (lastButton == LOW && currentButton == HIGH)
+{
+ledon = !ledon;
+Serial.println(ledon);
+}
+
+lastButton = currentButton;
+
+digitalWrite(LED, ledon);
+
+}
+
+boolean debounce (boolean last) {
+
+boolean current = digitalRead(BUTTON);
+
+if (last != current)
+{
+delay(5);
+current = digitalRead(BUTTON);
+return current;
+}
+
+}
