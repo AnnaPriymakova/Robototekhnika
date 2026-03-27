@@ -1,0 +1,83 @@
+int pinButtons[]={2,3,4,5};
+int lastButtons[]={0,0,0,0};
+int currentButtons[]={0,0,0,0};
+
+int pinLeds[]={8,9,10};
+
+void setup() {
+
+Serial.begin(9600);
+
+for(int i=0;i<4;i++) {
+pinMode (pinButtons[i], INPUT);
+}
+
+for(int i=0;i<3;i++) {
+pinMode (pinLeds[i], OUTPUT);
+digitalWrite (pinLeds[i], LOW);
+}
+
+}
+
+void loop() {
+
+for(int i=0;i<4;i++)
+{
+
+currentButtons[i] = debounce(lastButtons[i], pinButtons[i]);
+
+if (lastButtons[i] == 0 && currentButtons[i] == 1)
+{
+Serial.println("click!");
+doButtons(i);
+}
+
+lastButtons[i] = currentButtons[i];
+
+}
+
+}
+
+void doButtons(int but)
+{
+
+switch(but)
+{
+
+case 0:
+digitalWrite(pinLeds[0],HIGH);
+break;
+
+case 1:
+digitalWrite(pinLeds[1],HIGH);
+break;
+
+case 2:
+digitalWrite(pinLeds[2],HIGH);
+break;
+
+case 3:
+for(int i=0;i<3;i++) {
+digitalWrite (pinLeds[i], LOW);
+}
+break;
+
+default:
+break;
+
+}
+
+}
+
+int debounce(int last,int pin1) {
+
+int current = digitalRead(pin1);
+
+if (last != current)
+{
+delay(5);
+current = digitalRead(pin1);
+return current;
+}
+
+}
