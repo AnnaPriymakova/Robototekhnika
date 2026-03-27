@@ -1,0 +1,18 @@
+int LED=13;
+int BUTTON=2;
+boolean buttonState;
+
+void setup() {
+
+pinMode(LED, OUTPUT);
+pinMode (BUTTON, INPUT_PULLUP);
+
+}
+
+void loop() {
+
+buttonState = digitalRead(BUTTON);
+buttonState = !buttonState;
+digitalWrite(LED, buttonState);
+
+}
