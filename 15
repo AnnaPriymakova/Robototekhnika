@@ -1,0 +1,53 @@
+int valA0 = 0;
+
+const int pinsled[]={8,9,10,11,12};
+
+void setup() {
+
+Serial.begin(9600);
+
+for(int i=0;i<10;i++) {
+pinMode(pinsled[i],OUTPUT);
+digitalWrite(pinsled[i],LOW);
+}
+
+}
+
+void loop() {
+
+valA0 = analogRead(A0);
+
+if(valA0<100) {
+setLed(0);
+}
+
+else if(valA0<200) {
+setLed(0);
+}
+
+else if(valA0<400) {
+setLed(0);
+}
+
+else if(valA0<600) {
+setLed(0);
+}
+
+else if(valA0<800) {
+setLed(0);
+}
+
+}
+
+void setLed(int n) {
+
+for(int i=0;i<5;i++) {
+
+if(i==n)
+{digitalWrite(pinsled[i],HIGH);}
+else
+{digitalWrite(pinsled[i],LOW);}
+
+}
+
+}
